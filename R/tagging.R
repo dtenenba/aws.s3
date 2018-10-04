@@ -58,3 +58,42 @@ delete_tagging <- function(bucket, ...){
                 ...)
     return(TRUE)
 }
+
+
+#' @rdname tagging
+#' @export
+#' TODO finish documenting
+get_object_tagging <- function(bucket, object ) {
+    res <- s3HTTP(verb="GET", bucket=bucket, query=list(tagging=""), path=object)
+    print(res)
+    output <- list()
+    for (i in seq(1, length(res), by=2)) {
+        output[[unlist(res[i])]] = unlist(unname(res[i+1]))
+    }
+    output
+}
+
+
+#' @rdname tagging
+#' @export
+put_object_tagging <- function(bucket, object, tags = list(), ...){
+    
+    tags_char <- character(length(tags))
+    for (i in seq_along(tags)) {
+        tags_char[i] <- paste0("<Tag><Key>", names(tags)[i], "</Key><Value>", unname(tags[[i]]), "</Value></Tag>")
+    }
+    request_body <- paste0("<Tagging><TagSet>", paste0(tags_char, collapse = ""), "</TagSet></Tagging>")
+    tmpfile <- tempfile()
+    on.exit(unlink(tmpfile))
+    cat(request_body, file = tmpfile)
+    md <- base64enc::base64encode(digest::digest(file = tmpfile, raw = TRUE))
+    r <- s3HTTP(verb = "PUT", 
+                bucket = bucket,
+                path=object,
+                query = list(tagging = ""),
+                request_body = tmpfile,
+                headers = list(`Content-Length` = file.size(tmpfile), 
+                                   `Content-MD5` = md),
+                ...)
+    return(TRUE)
+}
