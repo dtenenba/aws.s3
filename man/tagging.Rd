@@ -4,6 +4,7 @@
 \alias{get_tagging}
 \alias{put_tagging}
 \alias{delete_tagging}
+\alias{delete_object_tagging}
 \alias{get_object_tagging}
 \alias{put_object_tagging}
 \title{Bucket tagging}
@@ -13,6 +14,8 @@ get_tagging(bucket, ...)
 put_tagging(bucket, tags = list(), ...)
 
 delete_tagging(bucket, ...)
+
+delete_object_tagging(bucket, object, ...)
 
 get_object_tagging(bucket, object)
 

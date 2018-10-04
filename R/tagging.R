@@ -62,14 +62,38 @@ delete_tagging <- function(bucket, ...){
 
 #' @rdname tagging
 #' @export
-#' TODO finish documenting
+delete_object_tagging <- function(bucket, object, ...){
+    r <- s3HTTP(verb = "DELETE", 
+                bucket = bucket,
+                path=object,
+                query = list(tagging = ""),
+                parse_response = FALSE,
+                ...)
+    return(TRUE)
+}
+
+
+
+
+#' @rdname tagging
+#' @export
 get_object_tagging <- function(bucket, object ) {
     res <- s3HTTP(verb="GET", bucket=bucket, query=list(tagging=""), path=object)
-    print(res)
     output <- list()
-    for (i in seq(1, length(res), by=2)) {
-        output[[unlist(res[i])]] = unlist(unname(res[i+1]))
+    if (length(res) == 0) {
+        return(list())
     }
+    if (all(names(res) == c("Key", "Value"))) {
+        for (i in seq(1, length(res), by=2)) {
+            output[[unlist(res[i])]] = unlist(unname(res[i+1]))
+        }
+
+    } else {
+        for (item in res) {
+            output[[item[["Key"]]]] = item[["Value"]]
+        }
+    }
+
     output
 }
 
