@@ -8,7 +8,8 @@
 \usage{
 get_encryption(bucket, ...)
 
-put_encryption(bucket, algorithm = c("AES256", "KMS"), kms_arn = NULL, ...)
+put_encryption(bucket, algorithm = c("AES256", "KMS"), kms_arn = NULL,
+  ...)
 
 delete_encryption(bucket, ...)
 }

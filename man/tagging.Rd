@@ -4,6 +4,8 @@
 \alias{get_tagging}
 \alias{put_tagging}
 \alias{delete_tagging}
+\alias{get_object_tagging}
+\alias{put_object_tagging}
 \title{Bucket tagging}
 \usage{
 get_tagging(bucket, ...)
@@ -11,6 +13,10 @@ get_tagging(bucket, ...)
 put_tagging(bucket, tags = list(), ...)
 
 delete_tagging(bucket, ...)
+
+get_object_tagging(bucket, object)
+
+put_object_tagging(bucket, object, tags = list(), ...)
 }
 \arguments{
 \item{bucket}{Character string with the name of the bucket, or an object of class \dQuote{s3_bucket}.}

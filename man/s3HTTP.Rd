@@ -10,8 +10,9 @@ s3HTTP(verb = "GET", bucket = "", path = "", query = NULL,
   check_region = FALSE, url_style = c("path", "virtual"),
   base_url = Sys.getenv("AWS_S3_ENDPOINT", "s3.amazonaws.com"),
   verbose = getOption("verbose", FALSE),
-  show_progress = getOption("verbose", FALSE), region = NULL, key = NULL,
-  secret = NULL, session_token = NULL, use_https = TRUE, ...)
+  show_progress = getOption("verbose", FALSE), region = NULL,
+  key = NULL, secret = NULL, session_token = NULL,
+  use_https = TRUE, ...)
 }
 \arguments{
 \item{verb}{A character string containing an HTTP verb, defaulting to \dQuote{GET}.}

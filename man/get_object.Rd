@@ -7,7 +7,8 @@
 \alias{s3connection}
 \title{Get object}
 \usage{
-get_object(object, bucket, headers = list(), parse_response = FALSE, ...)
+get_object(object, bucket, headers = list(), parse_response = FALSE,
+  ...)
 
 save_object(object, bucket, file = basename(object), headers = list(),
   overwrite = TRUE, ...)

@@ -7,7 +7,8 @@
 \usage{
 get_acl(object, bucket, ...)
 
-put_acl(object, bucket, acl = NULL, headers = list(), body = NULL, ...)
+put_acl(object, bucket, acl = NULL, headers = list(), body = NULL,
+  ...)
 }
 \arguments{
 \item{object}{Character string with the object key, or an object of class \dQuote{s3_object}. In most cases, if \code{object} is specified as the latter, \code{bucket} can be omitted because the bucket name will be extracted from \dQuote{Bucket} slot in \code{object}.}
