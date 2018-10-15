@@ -8,6 +8,7 @@
 #' @param multipart A logical indicating whether to use multipart uploads. See \url{http://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html}. If \code{file} is less than 100 MB, this is ignored.
 #' @template acl
 #' @param headers List of request headers for the REST call. If \code{multipart = TRUE}, this only applies to the initialization call.
+#' @param tagging A list containing key-value pairs of tag names and values to tag the object with.
 #' @param verbose A logical indicating whether to be verbose. Default is given by \code{options("verbose")}.
 #' @param show_progress A logical indicating whether to show a progress bar for uploads. Default is given by \code{options("verbose")}.
 #' @template dots
@@ -71,6 +72,7 @@ function(
   multipart = FALSE,
   acl = NULL,
   headers = list(),
+  tagging = list(),
   verbose = getOption("verbose", FALSE),
   show_progress = getOption("verbose", FALSE),
   ...
@@ -90,6 +92,12 @@ function(
         } else {
             headers <- c(headers, list(`x-amz-acl` = "private"))
         }
+    }
+    if (!missing(tagging)) {
+        headers[['x-amz-tagging-directive']] <- 'REPLACE'
+        pairs <- unlist(lapply(names(tagging),
+          function(x) paste(x, tagging[[x]], sep="=")))
+        headers[['x-amz-tagging']] <- paste(pairs, collapse="&")
     }
     if (isTRUE(multipart)) {
         size <- calculate_data_size(file)
