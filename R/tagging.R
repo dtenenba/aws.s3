@@ -8,14 +8,20 @@
 #' @examples
 #' \dontrun{
 #'  put_tagging("mybucket", tags = list(foo = "1", bar = "2"))
+#'  put_object_tagging("mybucket", "myobject" list(foo="1", bar="2"))
 #'  get_tagging("mybucket")
+#'  get_object_tagging("mybucket", myobject)
 #'  delete_tagging("mybucket")
+#'  delete_object_tagging("mybucket", "myobject")
 #' }
 #' 
 #' @references
 #'  \href{http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTtagging.html}{API Documentation: PUT tagging}
+#'  \href{https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTtagging.html}{API Documentation: PUT Object tagging}
 #'  \href{http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETtagging.html}{API Documentation: GET tagging}
+#'  \href{https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETtagging.html}{API Documentation: GET Object tagging}
 #'  \href{http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEtagging.html}{API Documentation: DELETE tagging}
+#'  \href{https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectDELETEtagging.html}{API Documentation: DELETE Object tagging}
 #' @export
 get_tagging <- function(bucket, ...){
     r <- s3HTTP(verb = "GET", 
